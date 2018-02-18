@@ -1,21 +1,23 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:6-alpine'
-        }
-    }
-    environment {
-        CI = 'true'
-    }
+    agent none
     stages {
         stage('Build') {
+            agent {
+                docker {
+                    image 'node:6-alpine'
+                }
+            }
             steps {
                 sh 'npm install'
             }
         }
         stage('Dockerize') {
-            steps {
-                sh 'docker build -t thezultimate/hello-nodejs .'
+            agent {
+                dockerfile {
+                    filename 'Dockerfile'
+                    dir '.'
+                    label 'thezultimate/hello-nodejs'
+                }
             }
         }
     }
