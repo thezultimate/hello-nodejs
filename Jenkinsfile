@@ -12,7 +12,6 @@ pipeline {
             }
         }
         stage('Dockerize') {
-            agent none
             steps {
                 sh 'docker build -t thezultimate/hello-nodejs .'
             }
