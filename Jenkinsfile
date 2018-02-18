@@ -19,6 +19,9 @@ pipeline {
                     label 'thezultimate/hello-nodejs'
                 }
             }
+            steps {
+                
+            }
         }
     }
 }
