@@ -13,5 +13,10 @@ pipeline {
                 sh 'npm install'
             }
         }
+        stage('Dockerize') {
+            steps {
+                sh 'docker build -t thezultimate/hello-nodejs .'
+            }
+        }
     }
 }
