@@ -12,15 +12,9 @@ pipeline {
             }
         }
         stage('Dockerize') {
-            agent {
-                dockerfile {
-                    filename 'Dockerfile'
-                    dir '.'
-                    label 'thezultimate/hello-nodejs'
-                }
-            }
+            agent none
             steps {
-                echo 'Dockerize...'
+                sh 'docker build -t thezultimate/hello-nodejs .'
             }
         }
     }
