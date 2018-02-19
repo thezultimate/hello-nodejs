@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'jenkins-slave-with-docker' }
+    agent none
     stages {
         stage('Build') {
             agent {
