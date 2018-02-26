@@ -19,7 +19,8 @@ podTemplate(
         )
     ],
     volumes: [
-        hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock')
+        hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock'),
+        secretVolume(mountPath: '/etc/mount', secretName: 'dockerhub-thezultimate-credentials')
     ]
 )
 
