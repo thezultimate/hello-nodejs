@@ -36,7 +36,6 @@ podTemplate(
         }
         stage('Dockerize') {
             container('docker-image') {
-                sh "echo Debug secrets"
                 def username = readFile '/etc/mount/username'
                 def password = readFile '/etc/mount/password'
                 sh "echo Login to docker registry"
