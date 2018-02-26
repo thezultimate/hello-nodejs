@@ -37,9 +37,10 @@ podTemplate(
         stage('Dockerize') {
             container('docker-image') {
                 def username = readFile '/etc/mount/username'
-                def password = readFile '/etc/mount/password'
+                // def password = readFile '/etc/mount/password'
                 sh "echo Login to docker registry"
-                sh "docker login -u ${username} -p ${password}"
+                // sh "docker login -u ${username} -p ${password}"
+                sh "cat /etc/mount/password | docker login -u ${username} --password-stdin"
                 sh "echo Starting docker build"
                 sh "docker build -t thezultimate/hello-nodejs ."
                 sh "echo Pushing docker image to registry"
