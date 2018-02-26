@@ -37,8 +37,12 @@ podTemplate(
             container('docker-image') {
                 sh "echo Debug secrets"
                 sh "export"
+                sh "echo Login to docker registry"
+                sh "docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD"
                 sh "echo Starting docker build"
                 sh "docker build -t thezultimate/hello-nodejs ."
+                sh "echo Pushing docker image to registry"
+                sh "docker push thezultimate/hello-nodejs"
             }
         }
     }
