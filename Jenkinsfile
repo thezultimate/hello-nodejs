@@ -43,6 +43,7 @@ podTemplate(
                 // sh "printenv DOCKERHUB_USERNAME"
                 def username = sh "printenv DOCKERHUB_USERNAME"
                 sh "echo ${username}"
+                sh "ls -al /etc/mount/"
                 sh "echo Printing environment variables"
                 // sh "echo ${env.DOCKERHUB_USERNAME}"
                 // sh "echo ${env.DOCKERHUB_PASSWORD}"
