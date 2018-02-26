@@ -42,7 +42,7 @@ podTemplate(
                 // sh "env"
                 sh "printenv"
                 sh "echo Printing environment variables"
-                sh "echo ${username}"
+                sh "echo ${env.username}"
                 sh "echo ${env.DOCKERHUB_USERNAME}"
                 sh "echo ${env.DOCKERHUB_PASSWORD}"
                 // sh "echo Login to docker registry"
