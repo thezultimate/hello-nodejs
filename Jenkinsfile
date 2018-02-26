@@ -38,10 +38,10 @@ podTemplate(
                 sh "echo Debug secrets"
                 sh "export"
                 sh "echo Printing environment variables"
-                def username = build.getEnvironment(listener).get('DOCKERHUB_USERNAME')
-                def password = build.getEnvironment(listener).get('DOCKERHUB_PASSWORD')
-                sh "echo ${username}"
-                sh "echo ${password}"
+                sh "echo ${DOCKERHUB_USERNAME}"
+                sh "echo ${DOCKERHUB_PASSWORD}"
+                sh "echo $DOCKERHUB_USERNAME"
+                sh "echo $DOCKERHUB_PASSWORD"
                 sh "echo ${env.DOCKERHUB_USERNAME}"
                 sh "echo ${env.DOCKERHUB_PASSWORD}"
                 sh "echo Login to docker registry"
