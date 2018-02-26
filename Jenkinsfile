@@ -1,3 +1,5 @@
+#!/usr/bin/env groovy
+
 podTemplate(
     label: 'super-slave',
     containers: [
