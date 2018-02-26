@@ -37,6 +37,9 @@ podTemplate(
             container('docker-image') {
                 sh "echo Debug secrets"
                 sh "export"
+                sh "echo Printing environment variables"
+                sh "echo ${env.DOCKERHUB_USERNAME}"
+                sh "echo ${env.DOCKERHUB_PASSWORD}"
                 sh "echo Login to docker registry"
                 sh "docker login -u ${env.DOCKERHUB_USERNAME} -p ${env.DOCKERHUB_PASSWORD}"
                 sh "echo Starting docker build"
