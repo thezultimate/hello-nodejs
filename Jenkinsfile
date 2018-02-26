@@ -1,4 +1,5 @@
-#!/usr/bin/env groovy
+import jenkins.model.*
+jenkins = Jenkins.instance
 
 podTemplate(
     label: 'super-slave',
@@ -37,16 +38,17 @@ podTemplate(
         }
         stage('Dockerize') {
             container('docker-image') {
-                def username = env.DOCKERHUB_USERNAME
+                EnvironmentVariablesNodeProperty prop = jenkins.getGlobalNodeProperties().get(EnvironmentVariablesNodeProperty.class)
+                EnvVars global_env = prop.getEnvVars()
 
                 sh "echo Debug secrets"
                 // sh "export"
                 // sh "env"
-                sh "printenv"
+                // sh "printenv"
+                sh "echo ${global_env}"
                 sh "echo Printing environment variables"
-                sh "echo ${env.username}"
-                sh "echo ${env:DOCKERHUB_USERNAME}"
-                sh "echo ${env:DOCKERHUB_PASSWORD}"
+                sh "echo ${env.DOCKERHUB_USERNAME}"
+                sh "echo ${env.DOCKERHUB_PASSWORD}"
                 // sh "echo Login to docker registry"
                 // sh "docker login -u ${env.DOCKERHUB_USERNAME} -p ${env.DOCKERHUB_PASSWORD}"
                 sh "echo Starting docker build"
