@@ -43,7 +43,7 @@ podTemplate(
                 // sh "echo ${env.DOCKERHUB_USERNAME}"
                 // sh "echo ${env.DOCKERHUB_PASSWORD}"
                 sh "echo Login to docker registry"
-                sh "docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}"
+                sh "docker login -u DOCKERHUB_USERNAME -p DOCKERHUB_PASSWORD"
                 sh "echo Starting docker build"
                 sh "docker build -t thezultimate/hello-nodejs ."
                 // sh "echo Pushing docker image to registry"
