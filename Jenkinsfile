@@ -38,14 +38,18 @@ podTemplate(
                 sh "echo Debug secrets"
                 sh "export"
                 sh "echo Printing environment variables"
+                def username = build.getEnvironment(listener).get('DOCKERHUB_USERNAME')
+                def password = build.getEnvironment(listener).get('DOCKERHUB_PASSWORD')
+                sh "echo ${username}"
+                sh "echo ${password}"
                 sh "echo ${env.DOCKERHUB_USERNAME}"
                 sh "echo ${env.DOCKERHUB_PASSWORD}"
                 sh "echo Login to docker registry"
                 sh "docker login -u ${env.DOCKERHUB_USERNAME} -p ${env.DOCKERHUB_PASSWORD}"
                 sh "echo Starting docker build"
                 sh "docker build -t thezultimate/hello-nodejs ."
-                sh "echo Pushing docker image to registry"
-                sh "docker push thezultimate/hello-nodejs"
+                // sh "echo Pushing docker image to registry"
+                // sh "docker push thezultimate/hello-nodejs"
             }
         }
     }
