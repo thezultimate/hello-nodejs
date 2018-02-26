@@ -35,11 +35,14 @@ podTemplate(
         }
         stage('Dockerize') {
             container('docker-image') {
+                def username = env.DOCKERHUB_USERNAME
+
                 sh "echo Debug secrets"
                 // sh "export"
                 // sh "env"
                 sh "printenv"
                 sh "echo Printing environment variables"
+                sh "echo ${username}"
                 sh "echo ${env.DOCKERHUB_USERNAME}"
                 sh "echo ${env.DOCKERHUB_PASSWORD}"
                 // sh "echo Login to docker registry"
