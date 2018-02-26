@@ -1,8 +1,22 @@
 podTemplate(
     label: 'super-slave',
     containers: [
-        containerTemplate(name: 'docker-image', image: 'docker', ttyEnabled: true, command: 'cat'),
-        containerTemplate(name: 'node-image', image: 'node:6-alpine', ttyEnabled: true, command: 'cat')
+        containerTemplate(
+            name: 'docker-image',
+            image: 'docker',
+            ttyEnabled: true,
+            command: 'cat'
+        ),
+        containerTemplate(
+            name: 'node-image',
+            image: 'node:6-alpine',
+            ttyEnabled: true,
+            command: 'cat',
+            envVars: [
+                secretEnvVar(key: 'DOCKERHUB_USERNAME', secretName: 'dockerhub-thezultimate-credentials', secretKey: 'username'),
+                secretEnvVar(key: 'DOCKERHUB_PASSWORD', secretName: 'dockerhub-thezultimate-credentials', secretKey: 'password')
+            ]
+        )
     ],
     volumes: [
         hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock')
@@ -21,6 +35,8 @@ podTemplate(
         }
         stage('Dockerize') {
             container('docker-image') {
+                sh "echo Debug secrets"
+                sh "export | grep DOCKERHUB"
                 sh "echo Starting docker build"
                 sh "docker build -t thezultimate/hello-nodejs ."
             }
