@@ -35,16 +35,13 @@ podTemplate(
         }
         stage('Dockerize') {
             container('docker-image') {
-                // def test_env = System.getenv("DOCKERHUB_USERNAME")
-                // sh "echo ${test_env}"
-                
                 sh "echo Debug secrets"
                 // sh "export"
                 // sh "env"
                 // sh "printenv"
-                sh "printenv DOCKERHUB_USERNAME"
+                sh "env.DOCKERHUB_USERNAME = printenv DOCKERHUB_USERNAME"
                 sh "echo Printing environment variables"
-                // sh "echo ${env.DOCKERHUB_USERNAME}"
+                sh "echo ${env.DOCKERHUB_USERNAME}"
                 // sh "echo ${env.DOCKERHUB_PASSWORD}"
                 // sh "echo Login to docker registry"
                 // sh "docker login -u DOCKERHUB_USERNAME -p DOCKERHUB_PASSWORD"
