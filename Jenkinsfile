@@ -5,17 +5,17 @@ podTemplate(
             name: 'docker-image',
             image: 'docker',
             ttyEnabled: true,
-            command: 'cat'
-        ),
-        containerTemplate(
-            name: 'node-image',
-            image: 'node:6-alpine',
-            ttyEnabled: true,
             command: 'cat',
             envVars: [
                 secretEnvVar(key: 'DOCKERHUB_USERNAME', secretName: 'dockerhub-thezultimate-credentials', secretKey: 'username'),
                 secretEnvVar(key: 'DOCKERHUB_PASSWORD', secretName: 'dockerhub-thezultimate-credentials', secretKey: 'password')
             ]
+        ),
+        containerTemplate(
+            name: 'node-image',
+            image: 'node:6-alpine',
+            ttyEnabled: true,
+            command: 'cat'
         )
     ],
     volumes: [
