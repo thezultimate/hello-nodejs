@@ -1,4 +1,6 @@
 import jenkins.model.*
+import hudson.slaves.EnvironmentVariablesNodeProperty
+import hudson.EnvVars
 jenkins = Jenkins.instance
 
 podTemplate(
