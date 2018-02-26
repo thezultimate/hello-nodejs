@@ -1,7 +1,3 @@
-import jenkins.model.*
-import hudson.slaves.EnvironmentVariablesNodeProperty
-import hudson.EnvVars
-
 podTemplate(
     label: 'super-slave',
     containers: [
@@ -39,7 +35,10 @@ podTemplate(
         }
         stage('Dockerize') {
             container('docker-image') {
-                // def jenkins = Jenkins.instance
+                import jenkins.model.*
+                import hudson.slaves.EnvironmentVariablesNodeProperty
+                import hudson.EnvVars
+                
                 EnvironmentVariablesNodeProperty prop = Jenkins.instance.getGlobalNodeProperties().get(EnvironmentVariablesNodeProperty.class)
                 EnvVars global_env = prop.getEnvVars()
 
