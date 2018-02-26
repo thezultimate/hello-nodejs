@@ -39,7 +39,7 @@ podTemplate(
         }
         stage('Dockerize') {
             container('docker-image') {
-                jenkins = Jenkins.instance
+                def jenkins = Jenkins.instance
                 EnvironmentVariablesNodeProperty prop = jenkins.getGlobalNodeProperties().get(EnvironmentVariablesNodeProperty.class)
                 EnvVars global_env = prop.getEnvVars()
 
