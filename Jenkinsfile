@@ -35,11 +35,9 @@ podTemplate(
         }
         stage('Dockerize') {
             container('docker-image') {
-                def env = System.getenv()
-                // env.each {
-                //     println it
-                // }
-
+                def test_env = System.getenv("PATH")
+                sh "echo ${test_env}"
+                
                 sh "echo Debug secrets"
                 // sh "export"
                 // sh "env"
