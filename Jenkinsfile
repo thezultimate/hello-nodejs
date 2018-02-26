@@ -39,7 +39,7 @@ podTemplate(
                 // sh "export"
                 sh "env"
                 sh "echo Printing environment variables"
-                // sh "echo env.DOCKERHUB_USERNAME"
+                sh "echo ${env}"
                 // sh "echo env.DOCKERHUB_PASSWORD"
                 // sh "echo $DOCKERHUB_USERNAME"
                 // sh "echo $DOCKERHUB_PASSWORD"
