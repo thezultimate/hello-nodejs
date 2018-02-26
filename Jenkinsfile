@@ -39,8 +39,8 @@ podTemplate(
         }
         stage('Dockerize') {
             container('docker-image') {
-                def jenkins = Jenkins.instance
-                EnvironmentVariablesNodeProperty prop = jenkins.getGlobalNodeProperties().get(EnvironmentVariablesNodeProperty.class)
+                // def jenkins = Jenkins.instance
+                EnvironmentVariablesNodeProperty prop = Jenkins.instance.getGlobalNodeProperties().get(EnvironmentVariablesNodeProperty.class)
                 EnvVars global_env = prop.getEnvVars()
 
                 sh "echo Debug secrets"
