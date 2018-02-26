@@ -43,7 +43,9 @@ podTemplate(
                 // sh "printenv DOCKERHUB_USERNAME"
                 
                 def username = readFile '/etc/mount/username'
+                def password = readFile '/etc/mount/password'
                 sh "echo ${username}"
+                sh "echo ${password}"
 
                 sh "ls -al /etc/mount/"
                 
