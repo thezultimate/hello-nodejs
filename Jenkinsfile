@@ -36,7 +36,7 @@ podTemplate(
         stage('Dockerize') {
             container('docker-image') {
                 sh "echo Debug secrets"
-                sh "export | grep DOCKERHUB"
+                sh "export"
                 sh "echo Starting docker build"
                 sh "docker build -t thezultimate/hello-nodejs ."
             }
