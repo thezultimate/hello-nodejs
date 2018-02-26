@@ -37,28 +37,14 @@ podTemplate(
         stage('Dockerize') {
             container('docker-image') {
                 sh "echo Debug secrets"
-                // sh "export"
-                // sh "env"
-                // sh "printenv"
-                // sh "printenv DOCKERHUB_USERNAME"
-                
                 def username = readFile '/etc/mount/username'
                 def password = readFile '/etc/mount/password'
-                sh "echo ${username}"
-                sh "echo ${password}"
-
-                sh "ls -al /etc/mount/"
-                
-                sh "echo Printing environment variables"
-                // sh "echo ${env.DOCKERHUB_USERNAME}"
-                // sh "echo ${env.DOCKERHUB_PASSWORD}"
-
-                // sh "echo Login to docker registry"
-                // sh "docker login -u DOCKERHUB_USERNAME -p DOCKERHUB_PASSWORD"
+                sh "echo Login to docker registry"
+                sh "docker login -u ${username} -p ${password}"
                 sh "echo Starting docker build"
                 sh "docker build -t thezultimate/hello-nodejs ."
-                // sh "echo Pushing docker image to registry"
-                // sh "docker push thezultimate/hello-nodejs"
+                sh "echo Pushing docker image to registry"
+                sh "docker push thezultimate/hello-nodejs"
             }
         }
     }
