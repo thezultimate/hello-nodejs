@@ -35,23 +35,15 @@ podTemplate(
         }
         stage('Dockerize') {
             container('docker-image') {
-                import jenkins.model.*
-                import hudson.slaves.EnvironmentVariablesNodeProperty
-                import hudson.EnvVars
-                
-                EnvironmentVariablesNodeProperty prop = Jenkins.instance.getGlobalNodeProperties().get(EnvironmentVariablesNodeProperty.class)
-                EnvVars global_env = prop.getEnvVars()
-
                 sh "echo Debug secrets"
                 // sh "export"
                 // sh "env"
                 // sh "printenv"
-                sh "echo ${global_env}"
                 sh "echo Printing environment variables"
-                sh "echo ${env.DOCKERHUB_USERNAME}"
-                sh "echo ${env.DOCKERHUB_PASSWORD}"
-                // sh "echo Login to docker registry"
-                // sh "docker login -u ${env.DOCKERHUB_USERNAME} -p ${env.DOCKERHUB_PASSWORD}"
+                // sh "echo ${env.DOCKERHUB_USERNAME}"
+                // sh "echo ${env.DOCKERHUB_PASSWORD}"
+                sh "echo Login to docker registry"
+                sh "docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}"
                 sh "echo Starting docker build"
                 sh "docker build -t thezultimate/hello-nodejs ."
                 // sh "echo Pushing docker image to registry"
