@@ -36,7 +36,8 @@ podTemplate(
         stage('Dockerize') {
             container('docker-image') {
                 sh "echo Debug secrets"
-                sh "export"
+                // sh "export"
+                sh "env"
                 sh "echo Printing environment variables"
                 // sh "echo env.DOCKERHUB_USERNAME"
                 // sh "echo env.DOCKERHUB_PASSWORD"
