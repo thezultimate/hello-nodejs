@@ -35,7 +35,7 @@ podTemplate(
         }
         stage('Dockerize') {
             container('docker-image') {
-                def test_env = System.getenv("DOCKERHUB_USERNAME")
+                def test_env = System.getenv()
                 sh "echo ${test_env}"
                 
                 sh "echo Debug secrets"
