@@ -5,11 +5,7 @@ podTemplate(
             name: 'docker-image',
             image: 'docker',
             ttyEnabled: true,
-            command: 'cat',
-            envVars: [
-                secretEnvVar(key: 'DOCKERHUB_USERNAME', secretName: 'dockerhub-thezultimate-credentials', secretKey: 'username'),
-                secretEnvVar(key: 'DOCKERHUB_PASSWORD', secretName: 'dockerhub-thezultimate-credentials', secretKey: 'password')
-            ]
+            command: 'cat'
         ),
         containerTemplate(
             name: 'node-image',
@@ -20,7 +16,7 @@ podTemplate(
     ],
     volumes: [
         hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock'),
-        secretVolume(mountPath: '/etc/mount', secretName: 'dockerhub-thezultimate-credentials')
+        secretVolume(mountPath: '/etc/variables', secretName: 'dockerhub-thezultimate-credentials')
     ]
 )
 
@@ -36,11 +32,9 @@ podTemplate(
         }
         stage('Dockerize') {
             container('docker-image') {
-                def username = readFile '/etc/mount/username'
-                // def password = readFile '/etc/mount/password'
+                def username = readFile '/etc/variables/username'
                 sh "echo Login to docker registry"
-                // sh "docker login -u ${username} -p ${password}"
-                sh "cat /etc/mount/password | docker login -u ${username} --password-stdin"
+                sh "cat /etc/variables/password | docker login -u ${username} --password-stdin"
                 sh "echo Starting docker build"
                 sh "docker build -t thezultimate/hello-nodejs ."
                 sh "echo Pushing docker image to registry"
