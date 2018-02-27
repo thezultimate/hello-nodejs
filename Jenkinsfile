@@ -32,13 +32,16 @@ podTemplate(
         }
         stage('Dockerize') {
             container('docker-image') {
-                def username = readFile '/etc/variables/username'
-                sh "echo Login to docker registry"
-                sh "cat /etc/variables/password | docker login -u ${username} --password-stdin"
                 sh "echo Starting docker build"
-                sh "docker build -t thezultimate/hello-nodejs ."
-                sh "echo Pushing docker image to registry"
-                sh "docker push thezultimate/hello-nodejs"
+                def customImage = docker.build("thezultimate/hello-nodejs")
+
+                // def username = readFile '/etc/variables/username'
+                // sh "echo Login to docker registry"
+                // sh "cat /etc/variables/password | docker login -u ${username} --password-stdin"
+                // sh "echo Starting docker build"
+                // sh "docker build -t thezultimate/hello-nodejs ."
+                // sh "echo Pushing docker image to registry"
+                // sh "docker push thezultimate/hello-nodejs"
             }
         }
     }
