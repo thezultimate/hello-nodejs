@@ -22,7 +22,7 @@ podTemplate(
 
 {
     node('super-slave') {
-        sh "echo Jenkins built this with post-commit hook!"
+        sh "echo Jenkins built this with post-commit hook v2!"
         stage('Build') {
             container('node-image') {
                 sh "echo Contacting git repo"
