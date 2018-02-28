@@ -25,7 +25,7 @@ podTemplate(
         stage('Build') {
             container('node-image') {
                 sh "echo Contacting git repo"
-                git scm
+                checkout scm
                 
                 sh "echo Starting npm install"
                 sh "npm install"
