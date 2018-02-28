@@ -25,7 +25,8 @@ podTemplate(
         stage('Build') {
             container('node-image') {
                 sh "echo Contacting git repo"
-                git 'https://github.com/thezultimate/hello-nodejs.git'
+                git scm
+                
                 sh "echo Starting npm install"
                 sh "npm install"
             }
@@ -33,10 +34,13 @@ podTemplate(
         stage('Dockerize') {
             container('docker-image') {
                 def username = readFile '/etc/variables/username'
+
                 sh "echo Login to docker registry"
                 sh "cat /etc/variables/password | docker login -u ${username} --password-stdin"
+                
                 sh "echo Starting docker build"
                 sh "docker build -t thezultimate/hello-nodejs ."
+                
                 sh "echo Pushing docker image to registry"
                 sh "docker push thezultimate/hello-nodejs"
             }
