@@ -22,6 +22,7 @@ podTemplate(
 
 {
     node('super-slave') {
+        sh "echo Jenkins polled and built this!"
         stage('Build') {
             container('node-image') {
                 sh "echo Contacting git repo"
